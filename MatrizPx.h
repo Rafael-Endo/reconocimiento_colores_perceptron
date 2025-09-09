@@ -87,7 +87,7 @@ struct MatrizPx {
 		}
 		else {
 			cout << matrizPxls.size() << " imagenes procesadas -> MatrizPxl.j -> getMatrizPx()" << endl;
-			//rmostrarMatrizPx(matrizPxls);
+			//mostrarMatrizPx(matrizPxls);
 			return matrizPxls;
 		}
 		
