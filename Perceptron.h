@@ -1,4 +1,4 @@
-#pragma once
+
 #ifndef PERCEPTRON_H
 #define PERCEPTRON_H
 
@@ -30,6 +30,8 @@ struct Perceptron {
     double tasa_aprendizaje;
     int claseColorG;
 
+    Perceptron(){}
+
     Perceptron(vector<vector<vector<vector<vector<int>>>>>& datos, double tasa_aprendizaje1, int _clase) {
         claseColorG = _clase;
         datos_colores = normalizar_colores(datos);
@@ -43,12 +45,6 @@ struct Perceptron {
         }
     }
 
-    void show() {
-        cout << "size ->" << datos_colores.size() << endl;
-        for (auto& _c : datos_colores) {
-            cout << "clase -> " << _c.tipo << endl;
-        }
-    }
 
     vector<Color> normalizar_colores(const vector<vector<vector<vector<vector<int>>>>>& datos) {
         const double norm = 255 * 1.0;
@@ -80,10 +76,9 @@ struct Perceptron {
         return (res >= 0.0 ? 1 : 0);
     }
 
-    bool predecir(int R, int G, int B) {
+    double predecir(int R, int G, int B) {
         double cast_R = (R * 1.0) / 255.0, cast_G = (G * 1.0) / 255.0, cast_B = (B * 1.0) / 255.0;
-        double res = (1.0 * W[0]) + (W[1] * cast_R) + (W[2] * cast_G) + (W[3] * cast_B);
-        return (res >= 0.0 ? 1 : 0);
+        return W[0] + W[1] * cast_R + W[2] * cast_G + W[3] * cast_B;
     }
 
     void entrenar(int k, double eps) {
@@ -118,6 +113,18 @@ struct Perceptron {
             }
         }
     }
+    
+    void show() {
+        cout << "size ->" << datos_colores.size() << endl;
+        for (auto& _c : datos_colores) {
+            cout << "clase -> " << _c.tipo << endl;
+        }
+    }
+
+    void showW() {
+        cout << W[0] << ' ' << W[1] << ' ' << W[2] << W[3] << endl;
+    }
+
 
 };
 
