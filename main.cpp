@@ -7,13 +7,16 @@
 #include "Perceptron.h"
 #include "MatrizPx.h"
 #include "InputImg.h"
+#include "JsonGF.h"
 #include <map>
 #include <opencv2/opencv.hpp>
+
 
 using namespace std;
 
 vector<vector<vector<vector<vector<int>>>>> datos(4);
 const string INPUTIMG = "C:/proyectoPerceptron/InputImg/inputimg.jpg";
+const string JSONPATH = "C:/proyectoPerceptron/jsongf/jsongf.json";
 
 void uploadDatos() {
 	for (int clase = 0; clase < 4; clase++) {
@@ -95,16 +98,20 @@ string predecirInput(const vector<vector<int>> &input) {
 	cal[0] = { cnt1, 1 };
 	cal[1] = { cnt2, 2 };
 	cal[2] = { cnt3, 3 };
-	sort(cal.begin(), cal.end(), greater<pair<double, int>>());
+	sort(cal.begin(), cal.end(), greater<pair<double,int>>());
 	return res[cal[0].second];
 }
 
 int main()
 {
-	init("verde", "rojo", "azul");
+	vector<vector<double>> W = { {0, 1, 2, 3}, {4, 5, 6,7} };
+	vector<double> E = { 0.1, 0.2, 0.3, 0.4, 0.5, 0.6 };
+	JsonGF writeGF(JSONPATH, W, W, W, E, E, E);
+	/*
+	init("VERDE", "ROJO", "AMARILLO");
 	InputImg IN(INPUTIMG);
 	vector<vector<int>> input = IN.getMatrizInput();
-	cout << predecirInput(input) << endl;
+	cout <<" Pre -> " << predecirInput(input) << endl;
 	return 0;
+	 */
 }
-
