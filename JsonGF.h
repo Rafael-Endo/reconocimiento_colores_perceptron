@@ -35,6 +35,17 @@ struct JsonGF {
 		ofstream out_file(path, ios::trunc);
 		out_file << GF.dump(4);
 	}
+	JsonGF(
+		const string &path,
+		const int& idxClase
+	) {
+		ifstream input_file(path);
+		json gf;
+		input_file >> gf;
+		gf["opcion"] = idxClase;
+		ofstream out_file(path, ios::trunc);
+		out_file << gf.dump(4);
+	}
 };
 
 
